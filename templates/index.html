@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <!--Importando Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"">
+    <!--Importando CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="container mt-4">
+
+    <h1 class="mb-4 text-center">Lista de Usuários</h1>
+
+    <!--Formulário para adicionar novos usuários-->
+    <form action="/usuarios" method="POST">
+        <div class="col-md-4">
+            <input type="text" name="nome" placeholder="Nome" required>
+        </div>
+        <div class="col-md-4">
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="col-md-4">
+            <button type="submit">Adicionar</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <!--Tabela de usuários-->
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.email }}</td>
+                <td class="text-center">
+                    <!--Botão Editar-->
+                    <button class="btn btn-primary btn-mn"
+                            data-id="{{ usuario.id }}"
+                            data-nome="{{ usuario.nome }}"
+                            data-email="{{ usuario.email }}"
+                            onclick="editarUsuario(this.dataset.id, this.dataset.nome, this.dataset.email)">
+                        Editar
+                    </button>
+
+                    <!--Botão Excluir-->
+                    <button class="btn btn-danger btn-sm"
+                            data-id="{{ usuario.id }}"
+                            onclick="deletarUsuario(this.dataset.id)">
+                    Excluir
+                    </button>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Função para editar usuário
+        function editarUsuario(id, nome, email) {
+            const novoNome = prompt("Novo nome:", nome);
+            const novoEmail = prompt("Novo Email: ", email);
+
+            if (novoNome && novoEmail) {
+                fetch(`/usuarios/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nome: novoNome, email: novoEmail})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensagem || data.erro);
+                    location.reload();
+                });
+            }
+        }
+
+        // Função para deletar usuário
+        function deletarUsuario(id) {
+            if (confirm("Tem certeza que deseja excluir este usuário? ")){
+                fetch(`/usuarios/${id}`, {method: "DELETE"})
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensagem || data.error);
+                    location.reload(); 
+                })
+            }
+        }
+
+        
+    </script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

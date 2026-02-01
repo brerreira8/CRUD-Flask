@@ -1,0 +1,99 @@
+/* Fundo geral */
+body {
+    background: #6f6ddb; /* quase branco, clean */
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Título */
+h1 {
+    color: #04203b;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* Formulário */
+form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+form input {
+    margin-bottom: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+}
+
+form button {
+    background-color: #2ecc71;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background-color: #27ae60;
+}
+
+/* Tabela */
+table {
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+thead {
+    background: #4a90e2; /* azul clean */
+    color: #fff;
+}
+
+tbody tr:hover {
+    background: #f1f9ff; /* azul clarinho no hover */
+}
+
+/* Botões de ação */
+.btn-primary {
+    background-color: #4a90e2;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #357ab8;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+}
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Dark mode */
+.dark-mode {
+    background: #1c1c1c;
+    color: #e9ecef;
+}
+.dark-mode h1 {
+    color: #f8f9fa;
+}
+.dark-mode table {
+    background: #2c2c2c;
+    color: #e9ecef;
+}
+.dark-mode thead {
+    background: #444;
+}
+.dark-mode tbody tr:hover {
+    background: #333;
+}
